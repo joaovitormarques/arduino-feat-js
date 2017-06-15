@@ -7,9 +7,13 @@ board.on("ready", function() {
   var led13 = new five.Led(13);
   var led12 = new five.Led(12);
   var led11 = new five.Led(11);
+  var led10 = new five.Led(6);
   var positivo = new five.Led(7);
-  var array = new five.Leds([11, 12, 13]);
+  var array = new five.Leds([6, 11, 12, 13]);
   var servo = new five.Servo(10);
+  var joystick = new five.Joystick({
+    pins: ["A0", "A1"]
+  });
 
 
   var timing = 250;
@@ -22,6 +26,7 @@ board.on("ready", function() {
     led13.off();
     led11.off();
     led12.off();
+    led10.off();
     positivo.off();
   });
 
@@ -40,6 +45,9 @@ board.on("ready", function() {
     },
     on12: function() {
       led12.on();
+    },
+    on10: function() {
+      led10.on();
     },
     off12: function() {
       led12.off();
@@ -108,7 +116,7 @@ board.on("ready", function() {
       console.log("Use Up and Down arrows for CW and CCW respectively. Space to stop.");
 
 
-      //var servo = new five.Servo.Continuous(7); O servo preto não é continuous
+      var servo = new five.Servo.Continuous(7);// O servo preto não é continuous
       process.stdin.resume();
       process.stdin.setEncoding("utf8");
       process.stdin.setRawMode(true);
@@ -122,16 +130,32 @@ board.on("ready", function() {
           process.exit();
         } else if (key.name === "up") {
           console.log("CW");
-          //servo.cw();
-          positivo.on();
+          servo.cw();
+          //positivo.on();
         } else if (key.name === "down") {
           console.log("CCW");
-          //servo.ccw();
-          positivo.off();
+          servo.ccw();
+          //positivo.off();
         } else if (key.name === "space") {
           console.log("Stopping");
           servo.stop();
         }
+      });
+    },
+    joystick: function(){
+      joystick.on("change", function() {
+        if(this.x >0.5){
+          led13.on();
+        }else led13.off();
+        if(this.y < -0.5){
+          led12.on();
+        }else led12.off();
+        if(this.x < -0.5){
+          led11.on();
+        }else led11.off();
+        if(this.y > 0.5){
+          led10.on();
+        }else led10.off();
       });
     }
   });
