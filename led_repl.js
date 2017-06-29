@@ -68,23 +68,6 @@ board.on("ready", function() {
         }
       });
     },
-    rotateCB: function(n){
-      n -= 1;
-      led13.fadeIn();
-      board.wait(500, function() {
-        led13.fadeOut();
-        led12.fadeIn();
-        board.wait(500, function() {
-          led12.fadeOut();
-          led11.fadeIn();
-          board.wait(500, function() {
-            led11.fadeOut();
-          });
-        });
-      });
-      if(n>0)
-        board.repl.context.rotateCB(n);
-    },
     arrayPulse: function(){
       array.pulse();
     },
@@ -101,20 +84,8 @@ board.on("ready", function() {
         board.wait(1500, function(){board.repl.context.rotateCB();});
       }
     },
-    rotateRobando: function(){
-      led13.fadeIn(1500);
-      console.log('ligou 13');
-      led13.fadeOut(1500, null);
-      led12.fadeIn(1500);
-      console.log('ligou 12');
-      led12.fadeOut(1500, null);
-      led11.fadeIn(1500);
-      console.log('ligou 11');
-      led11.fadeOut(1500, null);
-    },
     controlServo: function(){
       console.log("Use Up and Down arrows for CW and CCW respectively. Space to stop.");
-
 
       var servo = new five.Servo.Continuous(7);// O servo preto não é continuous
       process.stdin.resume();
@@ -168,14 +139,6 @@ board.on("ready", function() {
 function blink12(ms){
  led12.blink(ms)
 }
-function wait(ms){
-  'use strict';
-  var start = new Date().getTime();
-  var end = start;
-  while(end < start + ms) {
-   end = new Date().getTime();
- }
-}
 function fadeNext() {
   var candidateIndex = fadeIndex;
   array[fadeIndex].fadeIn(timing);
@@ -192,7 +155,6 @@ function fadeNext() {
 
     array[fadeIndex].fadeOut(timing, fadeNext);
   }
-
 });
 
 
