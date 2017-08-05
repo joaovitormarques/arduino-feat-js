@@ -1,0 +1,23 @@
+{
+  "name": "arduino-feat-js",
+  "version": "1.0.0",
+  "description": "Trabalho de graduação ITA 2017 Engenharia da Computação",
+  "main": "led_repl.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joaovitormarques/arduino-feat-js.git"
+  },
+  "author": "Joao Vitor Marques",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joaovitormarques/arduino-feat-js/issues"
+  },
+  "homepage": "https://github.com/joaovitormarques/arduino-feat-js#readme",
+  "dependencies": {
+    "express": "^4.15.3",
+    "socket-io": "^1.0.0"
+  }
+}
